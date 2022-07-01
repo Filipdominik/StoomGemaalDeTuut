@@ -1,0 +1,15 @@
+Water niveau sensor: A2
+Knop Regen(1): A4
+Knop Winter(2): A6
+Knop Zomer(3): A8
+
+Vlotter: D27
+Schakelaar Hand: 29
+Schakelaar Auto: 31
+
+Klep 1-6: 32-38
+Pomp 1-2: 39-40
+
+LED Knop Regen(1): 41
+LED Knop Winter(2): 42
+LED Knop Zomer(3): 43

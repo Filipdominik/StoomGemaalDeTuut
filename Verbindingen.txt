@@ -7,9 +7,9 @@ Vlotter: D27
 Schakelaar Hand: 29
 Schakelaar Auto: 31
 
-Klep 1-6: 32-38
-Pomp 1-2: 39-40
+Klep 1-6: 32-37
+Pomp 1-2: 38-39
 
-LED Knop Regen(1): 41
-LED Knop Winter(2): 42
-LED Knop Zomer(3): 43
+LED Knop Regen(1): 40
+LED Knop Winter(2): 41
+LED Knop Zomer(3): 42

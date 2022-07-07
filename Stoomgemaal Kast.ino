@@ -3,8 +3,8 @@
     Als u problemen tegenmoed komt na het aanpassen van de code kunt u de software opnieuw hier (https://github.com/Filipdominik/StoomGemaalDeTuut) downloaden.
     Veel plezier met het gebruiken van de maquette!
 De volgende variables zijn toegestaan om veranderdt te worden:*/
-#define GemaalAanPercentage 90 //Bij hoeveel % bedenkking van de sensor moet het gemaal aan
-#define GemaalUitPercentage 80 //Bij hoeveel %  bedekking van de sensor gaat het gemaal uit.
+#define GemaalAanPercentage 60 //Bij hoeveel % bedenkking van de sensor moet het gemaal aan
+#define GemaalUitPercentage 50 //Bij hoeveel %  bedekking van de sensor gaat het gemaal uit.
 #define TijdTussenSeizoenen 5000 //Hoeveel milisceonden het systeem moet wachten tussen seizoenen in (geef aan in ms)
 #define InputWachtTijd 5000 //Hoeveel ms de gebruiker heeft om een keuze te maken bij handmatig.
 
@@ -63,6 +63,27 @@ String SchakelaarStand(){       //Geeft 1 (Hand), 2(Auto) of 0(Niks) terug; de s
 int DigitalOutputPorts[] = {Klep1Port,Klep2Port,Klep3Port,Klep4Port,Klep5Port,Klep6Port,Pomp1Port,Pomp2Port,LEDZomerPort,LEDWinterPort,LEDRegenPort};
 
 void setup(){
+    if (KnopRegenStatus&&KnopZomerStatus&&KnopWinterStatus){
+        Serial.begin(9600);
+        Serial.println("Sensor reading mode activated");
+        while(true){
+            Serial.println("Sensor           | Value");
+            Serial.print("Knop Zomer       |\t");
+            Serial.println(KnopZomerStatus);
+            Serial.print("Knop Winter      |\t");
+            Serial.println(KnopWinterStatus);
+            Serial.print("Knop Regen       |\t");
+            Serial.println(KnopRegenStatus);
+            Serial.print("Water Niveau     |\t");
+            Serial.println(WaterNiveauStatus);
+            Serial.print("Vlotter          |\t");
+            Serial.println(VlotterStatus);
+            Serial.print("3 Stand          |\t");
+            Serial.println(SchakelaarStand());
+            Serial.println("-------------------------------\n");
+            delay(1000);
+        }
+    }
     for (int i=0;i<=10;i++){                    //Een loop wat de DigitalOutputPorts door gaat, en die als OUTPUT zet.
         pinMode(DigitalOutputPorts[i],OUTPUT);
         digitalWrite(DigitalOutputPorts[i],HIGH);}

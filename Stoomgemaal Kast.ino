@@ -16,7 +16,7 @@ De volgende variables zijn toegestaan om veranderdt te worden:*/
 #define Klep5Port 36
 #define Klep6Port 37
 #define Pomp1Port 38
-#define Pomp2Port 39
+#define Pomp2Port 48
 
 #define LEDRegenPort 40
 #define LEDWinterPort 41
@@ -29,12 +29,12 @@ De volgende variables zijn toegestaan om veranderdt te worden:*/
 
 #define WaterVlotterPort 27
 #define SchakelaarHandPort 29
-#define SchakelaarAutoPort 31
+#define SchakelaarAutoPort 30
 
 #define WaterNiveauStatus map((analogRead(WaterNiveauSensor)),0,700,0,100)
-#define KnopRegenStatus map(analogRead(KnopRegenPort),230,20,0,1)
-#define KnopWinterStatus map(analogRead(KnopWinterPort),230,20,0,1)
-#define KnopZomerStatus map(analogRead(KnopZomerPort),230,20,0,1)
+#define KnopRegenStatus map((analogRead(KnopRegenPort)),230,15,0,1)
+#define KnopWinterStatus map(analogRead(KnopWinterPort),230,15,0,1)
+#define KnopZomerStatus map(analogRead(KnopZomerPort),230,15,0,1)
 #define VlotterStatus map(digitalRead(WaterVlotterPort),1,0,0,1)
 //Einde definiëren van poorten en sensoren
 
@@ -63,6 +63,7 @@ String SchakelaarStand(){       //Geeft 1 (Hand), 2(Auto) of 0(Niks) terug; de s
 int DigitalOutputPorts[] = {Klep1Port,Klep2Port,Klep3Port,Klep4Port,Klep5Port,Klep6Port,Pomp1Port,Pomp2Port,LEDZomerPort,LEDWinterPort,LEDRegenPort};
 
 void setup(){
+    /*
     if (KnopRegenStatus&&KnopZomerStatus&&KnopWinterStatus){
         Serial.begin(9600);
         Serial.println("Sensor reading mode activated");
@@ -84,6 +85,7 @@ void setup(){
             delay(1000);
         }
     }
+    */
     for (int i=0;i<=10;i++){                    //Een loop wat de DigitalOutputPorts door gaat, en die als OUTPUT zet.
         pinMode(DigitalOutputPorts[i],OUTPUT);
         digitalWrite(DigitalOutputPorts[i],HIGH);}
@@ -93,16 +95,12 @@ void setup(){
     pinMode(KnopWinterPort,INPUT_PULLUP);
     pinMode(KnopZomerPort,INPUT_PULLUP);
     ToggleLEDs();
-    int VlotterGemiddelde=0;
-    for (int i=0;i<=10;i++){
-        VlotterGemiddelde+=VlotterStatus;
-        delay(80);}
 
-    if (int(VlotterGemiddelde/10) == 0){
+    if (VlotterStatus == 1){
         while (true){
             ToggleLEDs();
-            delay(500);}}
-    else{ToggleLEDs();}
+            delay(2500);}}
+        else{ToggleLEDs();}
         
 }
 
